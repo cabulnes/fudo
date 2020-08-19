@@ -67,4 +67,4 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 //    res.send('VALIDATE');
 //});
 
-module.exports = router;
+module.exports = router; 
