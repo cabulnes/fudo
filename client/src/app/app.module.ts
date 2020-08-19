@@ -7,7 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 //import { InputTextModule } from 'primeng/inputtext';
 //import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
+//import { TableModule } from 'primeng/table';
 //import { DialogModule } from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
@@ -50,7 +50,7 @@ const appRoutes: Routes =  [
     FlashMessagesModule,
     //InputTextModule,
     //ButtonModule,
-    TableModule,
+    //TableModule,
     //DialogModule,
   ],
   providers: [ValidateService, AuthService, AuthGuard],
