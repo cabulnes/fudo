@@ -2,11 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 //import { AnimationsModule } from '@angular/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-//import { HttpModule } from '@angular/http';
-import {RouterModule, Routes} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule, Routes} from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -24,17 +23,16 @@ import { DialogModule } from 'primeng/dialog';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+//import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
-
-const appRoutes: Routes =  [
-  {path:'', component: HomeComponent},
+const routes: Routes =  [
+  {path:'', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
-  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]}
-]
+  {path:'dashboard', component: DashboardComponent, canActivate:[]},
+  {path:'profile', component: ProfileComponent, canActivate:[]}
+];
 
 @NgModule({
   declarations: [
@@ -48,11 +46,11 @@ const appRoutes: Routes =  [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     DropdownModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    FlashMessagesModule,
+    
+    //FlashMessagesModule,
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     DataViewModule,
     InputTextModule,
@@ -60,7 +58,8 @@ const appRoutes: Routes =  [
     TableModule,
     DialogModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-//import { HttpModule } from '@angular/http';
-//import 'rxjs/add/operator/map';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { tokenNotExpired } from 'angular-jwt';
+
 
 @Injectable() 
 export class AuthService {
@@ -14,28 +15,28 @@ export class AuthService {
       this.isDev = false;  // Change to false before deployment
       }
 
-  //registerUser(user) {
-  //  let headers = new Headers();
-  //  headers.append('Content-Type', 'application/json');
-  //  return this.http.post('http://localhost:8080/users/register', user, {headers: headers})
-  //   .map(res => res.json());
-  //}
-
-  authenticateUser(user) {
-    let headers = new Headers();
+  registerUser(user) {
+    let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/users/authenticate', user, {headers: headers})
-      .map(res => res.json());
+    return this.http.post('http://localhost:8080/users/register', user, {headers: headers})
+     .pipe(map(res => res));
   }
 
-  //getProfile() {
-  //  let headers = new Headers();
-  //  this.loadToken();
-  //  headers.append('Authorization', this.authToken);
-  //  headers.append('Content-Type', 'application/json');
-  //  return this.http.get('http://localhost:8080/users/profile', {headers: headers})
-  //    .map(res => res.json());
-  //}
+  authenticateUser(user) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/users/authenticate', user, {headers: headers})
+      .pipe(map(res => res));
+  }
+
+  getProfile() {
+    let headers = new HttpHeaders();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get('http://localhost:8080/users/profile', {headers: headers})
+      .pipe(map(res => res));
+  }
 
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);

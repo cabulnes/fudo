@@ -49,7 +49,7 @@ app.use('/users', users);
 
 // Index Route
 app.get('/', (req, res) => {
-  res.send('invaild endpoint');
+  res.send('invaild endpoint...');
 });
 
 app.get('*', (req, res) => {
